@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Complaints Registered - CivicPulse</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; margin: 0; color: #222;}
+  header, footer { background: #2563eb; color: #fff; text-align: center; padding: 1.2rem 0;}
+  nav a { color: #fff; text-decoration: none; margin: 0 1.3rem; font-weight: 600;}
+  nav a:hover { text-decoration: underline; color: #ffe266;}
+  nav a.selected { color: #ffe266; text-decoration: underline; }
+  .container { max-width: 900px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 10px; box-shadow: 0 4px 14px #2563eb13;}
+  h2 { color: #2563eb; margin-bottom: 2rem; }
+  .complaints-list { margin-top: 1.7rem; }
+  .complaint-card {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #f1f5f9; border-radius: 8px; box-shadow: 0 2px 10px #2563eb10;
+    margin-bottom: 1.3rem; padding: 1.1rem 1.5rem; font-size: 1.04rem;
+    border: 2px solid transparent;
+  }
+  .complaint-details { flex: 1 1 auto; }
+  .alert-label {
+    display: inline-block; margin-bottom: 0.4em;
+    padding: 0.18em 0.9em; font-size: 0.93em; font-weight: bold; border-radius: 6px;
+  }
+  .card-alert-red { border-color: #ef4444; }
+  .card-alert-yellow { border-color: #fde68a; }
+  .alert-red { background: #fee2e2; color: #991b1b; }
+  .alert-yellow { background: #fef9c3; color: #a16207; }
+  .upvote-btn {
+    background: #f4f4f4; border: 1.1px solid #94a3b8;
+    border-radius: 18px; padding: 0.3em 0.7em; cursor: pointer;
+    margin-left: 12px; font-weight: 700; color: #2563eb;
+    display: flex; align-items: center;
+    transition: background 0.15s;
+  }
+  .upvote-btn:hover { background: #e0e7ff; color: #1e40af; }
+  .upvote-count { font-size: 1.01em; margin-left: 0.3em; }
+</style>
+</head>
+<body>
+<header>
+  <h1>CivicPulse</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="report.html">Report Issue</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="complaints.html" class="selected">Complaints Registered</a>
+    <a href="track.html">Track Issue</a>
+
+  </nav>
+</header>
+<div class="container">
+  <h2>Complaints Registered</h2>
+  <div class="complaints-list">
+    <h3>Recent Complaint Entries</h3>
+    <div id="complaints-list"></div>
+  </div>
+</div>
+<footer>
+  &copy; 2025 CivicPulse. All rights reserved.
+</footer>
+<script>
+// Demo complaints data: {region, type, desc, similarCount, upvotes, status}
+const sampleData = [
+  { region: 'Delhi', type: 'Pothole', desc: 'Massive pothole near Connaught Place.', status: 'Pending', similarCount: 112, upvotes: 12 },
+  { region: 'Mumbai', type: 'Garbage', desc: 'Garbage left uncollected for 4 days at Andheri.', status: 'In Progress', similarCount: 77, upvotes: 6 },
+  { region: 'Delhi', type: 'Garbage', desc: 'Overflowing bin at Saket crossing.', status: 'Pending', similarCount: 14, upvotes: 10 },
+  { region: 'Bengaluru', type: 'Streetlight Issue', desc: 'No lights near Silk Board signal.', status: 'Resolved', similarCount: 9, upvotes: 2 },
+  { region: 'Kolkata', type: 'Water Leakage', desc: 'Water pipeline leak opposite City Centre Salt Lake.', status: 'Pending', similarCount: 5, upvotes: 1 }
+];
+// Attach last submitted complaint (demo)
+if (sessionStorage.getItem('lastReport')) {
+  const last = JSON.parse(sessionStorage.getItem('lastReport'));
+  sampleData.unshift({
+    region: 'Your Report',
+    type: last.type || 'Other',
+    desc: last.desc || '(No description)',
+    status: 'Pending',
+    similarCount: Math.floor(Math.random()*125), // Demo random similar
+    upvotes: 0
+  });
+}
+function getCardAlertClass(cnt) {
+  if(cnt>=100) return 'card-alert-red';
+  if(cnt>=10) return 'card-alert-yellow';
+  return '';
+}
+function getAlertLabel(cnt) {
+  if (cnt >= 100) return '<span class="alert-label alert-red">Red Alert</span>';
+  if (cnt >= 10) return '<span class="alert-label alert-yellow">Yellow Alert</span>';
+  return '';
+}
+// Populate recent complaints section
+const complaintsDiv = document.getElementById('complaints-list');
+sampleData.slice(0,8).forEach(r => {
+  const div = document.createElement('div');
+  div.className = "complaint-card " + getCardAlertClass(r.similarCount);
+  div.innerHTML = `
+    <div class="complaint-details">
+      ${getAlertLabel(r.similarCount)}
+      <b>${r.type}</b>, <b>${r.region}</b>
+      <br>
+      <span style="color:#444">${r.desc}</span>
+      <br>
+      <small>Similar complaints: <b>${r.similarCount}</b></small>
+      <div class="c-status"><b>Status:</b> ${r.status}</div>
+    </div>
+    <button class="upvote-btn" onclick="this.querySelector('.upvote-count').textContent = Number(this.querySelector('.upvote-count').textContent)+1;">
+      upvote ↑ <span class="upvote-count">${r.upvotes}</span>
+    </button>
+  `;
+  complaintsDiv.appendChild(div);
+});
+</script>
+</body>
+</html>
