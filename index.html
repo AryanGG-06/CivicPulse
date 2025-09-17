@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CivicPulse - Engage. Report. Resolve.</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; margin: 0; color: #222; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem; background: #fff; border-radius: 10px; box-shadow: 0 4px 12px #2563eb22; }
+  header, footer { background: #2563eb; color: #fff; text-align: center; padding: 1.2rem 0; font-weight: 700; font-size: 1.2rem; }
+  nav { margin-top: 1rem; }
+  nav a { color: #fff; text-decoration: none; margin: 0 1.3rem; font-weight: 600; }
+  nav a:hover, nav a.selected { color: #ffe266; text-decoration: underline; }
+  h1.logo { font-size: 2.2rem; margin: 0; }
+  .tagline { color: #1e40af; font-weight: 600; font-size: 1.25rem; margin-bottom: 2rem; }
+  .branding-section { margin-bottom: 2.2rem; }
+  .highlight { color: #2563eb; }
+  .how-section { background: #e0e7ff; padding: 1.3rem 1rem; border-radius: 8px; margin: 2rem 0; }
+  .how-section h3 { color: #2563eb; }
+  .how-steps { display: flex; flex-wrap: wrap; gap: 1.2rem; margin-top: 1rem; }
+  .how-step { flex: 1 1 180px; background: #fff; padding: 1.1rem 0.9rem; border-radius: 8px; box-shadow: 0 4px 8px #1754ce20; font-size: 1.03rem; }
+  .dashboard-section { margin-top: 2rem; }
+  .dashboard-cards { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .dashboard-cards article { flex: 1 1 180px; background: #eef2ff; color: #333; border-radius: 9px; padding: 1.3rem; text-align: center; font-size: 1.14rem; box-shadow: 0 2px 8px #2563eb13; }
+  .dash-number { font-size: 2.35rem; display: block; color: #2563eb; }
+  .privacy-branding { background: #e2e8f0; padding: 1.1rem 2rem; border-radius: 9px; color: #374151; margin-top: 2rem; font-size: 1.01rem; }
+  .buttons-row { margin-top: 1.4rem; }
+  .btn { display: inline-block; border: none; border-radius: 30px; padding: 0.7rem 1.6rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; text-decoration: none; margin-right: 0.8rem; background: #2563eb; color: #fff; box-shadow: 0 2px 6px #2563eb1c; transition: background .2s; }
+  .btn:hover { background: #1e40af; }
+  .reports-section { margin: 2.5rem 0 1rem 0; }
+  .reports-section h3 { color: #2563eb; margin-bottom: 1rem; }
+  .report-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px #2563eb15; margin-bottom: 1.1rem; padding: 1.1rem 1.2rem; }
+  .reports-area { margin-top: 1.3rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1 class="logo">CivicPulse</h1>
+  <nav>
+    <a href="index.html" class="selected">Home</a>
+    <a href="report.html">Report Issue</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="complaints.html">Issues Registered</a>
+    <a href="track.html" >Track Issue</a>
+  </nav>
+</header>
+<div class="container">
+  <div class="branding-section">
+    <div class="tagline">Report in just 2 min because why not?</div>
+    <h2>Welcome to <span class="highlight">CivicPulse</span></h2>
+    <p>Your trusted platform to report public issues quickly and easily. Whether it's potholes, streetlight outages, water leakage, or garbage problems, CivicPulse connects you with local authorities to get things fixed faster.</p>
+    <p>We prioritize <strong>your privacy</strong> and secure handling of your reports. Location and photos are used solely for resolution purposes. You may submit reports anonymously. Our platform ensures robust protection and access controls for all submitted data.</p>
+    <div class="buttons-row">
+      <a href="report.html" class="btn">File a Report</a>
+      <a href="#howitworks" class="btn" style="background:#dbeafe;color:#2563eb;">How It Works</a>
+    </div>
+  </div>
+
+  <div id="howitworks" class="how-section">
+    <h3>How It Works</h3>
+    <div class="how-steps">
+      <div class="how-step">📝 <b>1.</b> Click "File a Report" to start and choose your issue.</div>
+      <div class="how-step">📸 <b>2.</b> Snap a photo or upload, and select your location on map.</div>
+      <div class="how-step">💡 <b>3.</b> Submit in under two minutes—your complaint is Registered and sent</div>
+      <div class="how-step">🔔 <b>4.</b> Track progress with your unique tracking ID; get notified as things move.</div>
+      <div class="how-step">🌏 <b>5.</b> Feel empowered—your issue joins others improving local areas all over India!</div>
+    </div>
+  </div>
+
+  <section class="dashboard-section" aria-label="Summary statistics">
+    <h3>Current Reports Summary</h3>
+    <div class="dashboard-cards">
+      <article>
+        <span class="dash-number">1,284</span>
+        Total Reports Filed
+      </article>
+      <article>
+        <span class="dash-number">937</span>
+        Reports Resolved
+      </article>
+      <article>
+        <span class="dash-number">347</span>
+        Reports Pending
+      </article>
+    </div>
+  </section>
+
+  <section class="reports-section">
+    <h3>Recently Reported Issues All Over India</h3>
+    <div id="reports-area" class="reports-area">
+      <!-- Dynamically loaded complaints -->
+    </div>
+  </section>
+
+  <section class="privacy-branding" aria-label="Privacy and data security information">
+    <p><strong>Privacy & Data Security:</strong> We collect only essential data to address the issue and never share your personal information. Location and photos are used strictly for resolution purposes. You may file anonymously. Our system safeguards your data with robust security measures and access controls.</p>
+  </section>
+</div>
+<footer>
+  &copy; 2025 CivicPulse. All rights reserved.
+</footer>
+<script>
+// Demo: Show 4-5 sample complaints + recent submission from sessionStorage
+const reports = [
+  { area: "Delhi", type: "Pothole", desc: "Massive pothole near Connaught Place.", photo: "", status: "Pending" },
+  { area: "Mumbai", type: "Garbage", desc: "Garbage not collected in Andheri East for last 5 days.", photo: "", status: "In Progress" },
+  { area: "Bengaluru", type: "Streetlight Issue", desc: "Streetlights off on ORR stretch near Marathahalli.", photo: "", status: "Resolved" },
+  { area: "Kolkata", type: "Water Leakage", desc: "Water pipeline leak opposite City Centre Salt Lake.", photo: "", status: "Pending" }
+];
+// Attach report user just submitted (if any)
+if (sessionStorage.getItem('lastReport')) {
+  const last = JSON.parse(sessionStorage.getItem('lastReport'));
+  last.area = "Your Area";
+  last.status = "Pending";
+  reports.unshift(last);
+}
+// Render cards
+const reportsArea = document.getElementById("reports-area");
+reports.forEach(r => {
+  const card = document.createElement("div");
+  card.className = "report-card";
+  card.innerHTML = `<b>Area:</b> ${r.area} <br>
+    <b>Type:</b> ${r.type} <br>
+    <b>Description:</b> ${r.desc} <br>
+    <b>Status:</b> ${r.status}`;
+  reportsArea.appendChild(card);
+});
+</script>
+</body>
+</html>
