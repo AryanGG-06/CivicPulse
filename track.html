@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Track a Report - CivicPulse</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  nav a:hover, nav a.selected { color: #ffe266; text-decoration: underline; }
+
+</style>
+</head>
+<body>
+<header>
+  <div class="container header-container">
+    <h1 class="logo">CivicPulse</h1>
+    <nav>
+    <a href="index.html">Home</a>
+    <a href="report.html">Report Issue</a>
+    <a href="dashboard.html">My Dashboard</a>
+    <a href="complaints.html">Issues Registered</a>
+    <a href="track.html" class="selected" >Track Issue</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container main-content form-content">
+  <h2>Track Your Report</h2>
+  <form id="track-form" novalidate>
+    <label for="tracking-id">Enter Your Report Tracking ID</label>
+    <input type="text" id="tracking-id" name="tracking-id" placeholder="e.g., RPT123456" required aria-required="true" />
+    <button type="submit" class="btn btn-primary">Check Status</button>
+  </form>
+  <section id="status-result" aria-live="polite" role="status" class="status-result"></section>
+</main>
+
+<footer>
+  <div class="container footer-container">
+    <div>Contact us: info@civicpulse.com | Phone: 1800-123-4567</div>
+    <nav aria-label="Footer navigation">
+      <a href="index.html">How it Works</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <small>&copy; 2025 CivicPulse. All rights reserved.</small>
+  </div>
+</footer>
+
+<script>
+  const trackForm = document.getElementById('track-form');
+  const statusResult = document.getElementById('status-result');
+
+  trackForm.addEventListener('submit', e => {
+    e.preventDefault();
+    statusResult.textContent = '';
+    const id = trackForm['tracking-id'].value.trim().toUpperCase();
+
+    if (!id) {
+      alert('Please enter a tracking ID.');
+      trackForm['tracking-id'].focus();
+      return;
+    }
+
+    // Mock response for demonstration (replace with real API call)
+    const mockStatusMap = {
+      'RPT123456': 'Resolved',
+      'RPT654321': 'In Progress',
+      'RPT000111': 'Pending'
+    };
+
+    const status = mockStatusMap[id] || 'Tracking ID not found. Please verify and try again.';
+    statusResult.textContent = typeof status === 'string' && status.startsWith('Tracking ID') ? status : `Status for ${id}: ${status}`;
+  });
+</script>
+</body>
+</html>

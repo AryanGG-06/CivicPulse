@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Report Submitted - CivicPulse</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; }
+  .container { max-width: 440px; margin: 6rem auto 2rem; background: #fff; padding: 3rem 2rem; border-radius: 10px; text-align: center; box-shadow: 0 4px 16px #2563eb25;}
+  h2 { color: #2563eb; margin-bottom: 1rem;}
+  .track-id { font-size: 1.5rem; font-weight: 700; letter-spacing: 1px; color: #1e40af; margin: 1.7rem 0;}
+  .btn { background: #2563eb; color: #fff; font-weight: 700; border-radius: 22px; padding: 0.85rem 1.8rem; font-size:1.07rem; border:none; cursor:pointer; margin:0.6rem; }
+  .btn:hover { background: #1e40af;}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>Form Submitted!</h2>
+  <div class="track-id">Your 13-digit Tracking ID:<br>
+    <span id="tid">Loading...</span>
+  </div>
+  <p>Check complaint status or view all complaints across India.</p>
+  <a href="dashboard.html" class="btn">My Dashboard</a>
+  <a href="index.html#reports-area" class="btn" style="background:#dbeafe;color:#2563eb;">View Complaints</a>
+</div>
+<script>
+// Get track id from URL
+const tid = new URLSearchParams(location.search).get("track_id") || "";
+document.getElementById("tid").textContent = tid;
+</script>
+</body>
+</html>
