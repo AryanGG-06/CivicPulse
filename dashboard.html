@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Dashboard - CivicPulse</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f8fa; }
+  .container { max-width: 600px; margin: 3.5rem auto; background: #fff; border-radius: 10px; padding: 2.7rem 2rem; box-shadow: 0 4px 12px #2563eb13; }
+   header, footer { background: #2563eb; color: #fff; text-align: center; padding: 1.2rem 0; font-weight: 700; font-size: 1.2rem; }
+  h2 { color: #2563eb; margin-bottom: 1rem;}
+  nav { margin-top: 1rem; }
+  nav a { color: #fff; text-decoration: none; margin: 0 1.3rem; font-weight: 600; }
+  nav a:hover, nav a.selected { color: #ffe266; text-decoration: underline; }
+  h1.logo { font-size: 2.2rem; margin: 0; }
+  .complaint-card { background: #e0e7ff; border-radius: 8px; padding: 1rem 1.2rem; box-shadow: 0 2px 8px #2563eb13; }
+  .status { font-weight: 800; color: #1e40af;}
+  .btn { margin-top: 2rem; font-weight: 700; background: #2563eb; color: #fff; border-radius: 22px; padding: 0.75rem 1.6rem; font-size:1rem; border:none; cursor:pointer;}
+  .btn:hover { background: #1e40af;}
+</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+ <h1 class="logo">CivicPulse</h1>
+  <nav>
+    <a href="index.html" >Home</a>
+    <a href="report.html">Report Issue</a>
+    <a href="dashboard.html"class="selected">My Dashboard</a>
+    <a href="complaints.html">Issues Registered</a>
+    <a href="track.html" >Track Issue</a>
+  </nav>
+</header>
+<div class="container">
+  <h2>Your Dashboard</h2>
+  <div id="myComplaint"></div>
+  <a href="index.html#reports-area" class="btn">View All Complaints</a>
+</div>
+<script>
+// Show last complaint from sessionStorage
+const lastReport = sessionStorage.getItem('lastReport');
+const myComplaintDiv = document.getElementById('myComplaint');
+if (lastReport) {
+  const c = JSON.parse(lastReport);
+  myComplaintDiv.innerHTML = `<div class="complaint-card">
+    <b>Type:</b> ${c.type}<br>
+    <b>Location:</b> ${c.location}<br>
+    <b>Description:</b> ${c.desc || '(none)'}<br>
+    <b>Status:</b> <span class="status">Pending</span>
+  </div>`;
+} else {
+  myComplaintDiv.innerHTML = "<p><i>No complaint reported yet. Please file a report to view status.</i></p>";
+}
+</script>
+</body>
+</html>
